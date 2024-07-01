@@ -1,0 +1,59 @@
+version: '3.0'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: dockerfile
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx.conf:ro
+    ports:
+      - "80:80"
+      - "443:443"
+
+    depends_on:
+      - django
+
+  postgresql:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  django:
+    build:
+      context: ./django
+      dockerfile: dockerfile
+    volumes:
+      - django_data:/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+
+volumes:
+  django_data:
+    driver: local
+    name: django_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ./django/app/
+  postgres_data:
+    driver: local
+    name: postgres_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres/

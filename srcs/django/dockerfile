@@ -1,0 +1,18 @@
+FROM python:3.9
+ENV PYTHONUNBUFFERED 1
+RUN mkdir -p /app && chmod +x /app
+
+WORKDIR /app
+
+COPY ./conf/requirements.txt /tmp/requirements.txt
+COPY ./conf/start_django.sh /tmp/start_django.sh
+COPY ./conf/settings.py /tmp/settings.py
+
+RUN chmod +x /tmp/requirements.txt
+RUN chmod +x /tmp/start_django.sh
+RUN chmod +x /tmp/settings.py
+# COPY . /app/
+RUN pip install -r /tmp/requirements.txt
+
+ENTRYPOINT [ "sh" ]
+CMD [ "/tmp/start_django.sh" ]
