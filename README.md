@@ -1,1 +1,4 @@
 # devops
+
+make
+make clean
