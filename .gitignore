@@ -2,4 +2,4 @@ certs/
 logs/
 .DS_Store
 .env
-
+postgres/
