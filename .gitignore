@@ -3,3 +3,5 @@ logs/
 .DS_Store
 .env
 postgres/
+__pycache__
+migrations
