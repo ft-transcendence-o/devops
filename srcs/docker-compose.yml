@@ -40,13 +40,12 @@ services:
       - .env
 
   django:
-    container_name: django
+    container_name: backend
     build:
-      context: ./django
-      dockerfile: dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
       - ./logs/django:/app/pong/logs
-      - django_data:/app/
     ports:
       - 8000:8000
     depends_on:
@@ -220,21 +219,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./postgres/
-  django_data:
-    driver: local
-    name: django_data
-    driver_opts:
-      type: none
-      o: bind
-      device: ./django/
+      device: $PWD/srcs/postgres/
   front_data:
     driver: local
     name: front_data
     driver_opts:
       type: none
       o: bind
-      device: ./front/
+      device: $PWD/srcs/frontend/
   elasticsearch:
 
 networks:
