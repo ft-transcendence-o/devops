@@ -9,6 +9,7 @@ services:
     volumes:
       - ./nginx/config/:/etc/nginx/conf.d/
       - ./logs/nginx:/var/log/nginx
+      - front_data:/usr/share/nginx/html/
     ports:
       - 80:80
       - 443:443
@@ -227,6 +228,13 @@ volumes:
       type: none
       o: bind
       device: ./django/
+  front_data:
+    driver: local
+    name: front_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ./front/
   elasticsearch:
 
 networks:
