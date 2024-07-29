@@ -3,6 +3,7 @@ NAME = pong
 all: $(NAME)
 
 $(NAME):
+	mkdir -p ./srcs/postgres
 	docker-compose -f ./srcs/docker-compose.yml --profile=setup up --build -d
 
 clean:
