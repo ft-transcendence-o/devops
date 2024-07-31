@@ -3,6 +3,7 @@ NAME = pong
 all: $(NAME)
 
 $(NAME):
+	git submodule update --init --recursive
 	mkdir -p ./srcs/postgres
 	docker-compose -f ./srcs/docker-compose.yml --profile=setup up --build -d
 
