@@ -7,6 +7,9 @@ $(NAME):
 	mkdir -p ./srcs/postgres
 	docker-compose -f ./srcs/docker-compose.yml --profile=setup up --build -d
 
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
+
 clean:
 	docker-compose -f srcs/docker-compose.yml down
 	rm -rf ./srcs/django/pong/pong_cache/
