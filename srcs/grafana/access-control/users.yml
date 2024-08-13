@@ -1,0 +1,16 @@
+apiVersion: 1
+
+users:
+  - name: John Doe
+    email: john@example.com
+    login: john
+    password: password123
+    org_id: 1
+    role: Editor
+
+  - name: Jane Smith
+    email: jane@example.com
+    login: jane
+    password: password456
+    org_id: 1
+    role: Viewer
