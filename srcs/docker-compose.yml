@@ -89,7 +89,6 @@ services:
 #       - ./grafana/access-control:/etc/grafana/provisioning/access-control:ro
 #       - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
 #       - ./certs/grafana/:/etc/grafana/cert:ro
-#       - grafana_data:/var/lib/grafana
 #     environment:
 #       - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
 #     depends_on:
@@ -162,8 +161,7 @@ services:
 #       - ./setup/entrypoint.sh:/entrypoint.sh:ro
 #       - ./setup/lib.sh:/lib.sh:ro
 #       - ./setup/roles:/roles:ro
-#       # (!) CA certificate. Generate using the 'tls' service.
-#       - ./tls/certs/ca/ca.crt:/ca.crt:ro
+#       - ./certs/ca/ca.crt:/ca.crt:ro
 #     environment:
 #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
 #       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
@@ -186,10 +184,9 @@ services:
 #         ELASTIC_VERSION: ${ELASTIC_VERSION}
 #     volumes:
 #       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-#       # (!) TLS certificates. Generate using the 'tls' service.
-#       - ./tls/certs/ca/ca.crt:/usr/share/elasticsearch/config/ca.crt:ro
-#       - ./tls/certs/elasticsearch/elasticsearch.crt:/usr/share/elasticsearch/config/elasticsearch.crt:ro
-#       - ./tls/certs/elasticsearch/elasticsearch.key:/usr/share/elasticsearch/config/elasticsearch.key:ro
+#       - ./certs/ca/ca.crt:/usr/share/elasticsearch/config/ca.crt:ro
+#       - ./certs/elasticsearch/elasticsearch.crt:/usr/share/elasticsearch/config/elasticsearch.crt:ro
+#       - ./certs/elasticsearch/elasticsearch.key:/usr/share/elasticsearch/config/elasticsearch.key:ro
 #       - elasticsearch_data:/usr/share/elasticsearch/data:Z
 #     ports:
 #       - 9200:9200
@@ -197,12 +194,7 @@ services:
 #     environment:
 #       node.name: elasticsearch
 #       ES_JAVA_OPTS: -Xms512m -Xmx512m
-#       # Bootstrap password.
-#       # Used to initialize the keystore during the initial startup of
-#       # Elasticsearch. Ignored on subsequent runs.
 #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-#       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-#       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
 #       discovery.type: single-node
 #     networks:
 #       - pong
@@ -217,8 +209,7 @@ services:
 #     volumes:
 #       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
 #       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-#       # (!) CA certificate. Generate using the 'tls' service.
-#       - ./tls/certs/ca/ca.crt:/usr/share/logstash/config/ca.crt:ro
+#       - ./certs/ca/ca.crt:/usr/share/logstash/config/ca.crt:ro
 #     ports:
 #       - 5044:5044
 #       - 50000:50000/tcp
@@ -241,10 +232,9 @@ services:
 #         ELASTIC_VERSION: ${ELASTIC_VERSION}
 #     volumes:
 #       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
-#       # (!) TLS certificates. Generate using the 'tls' service.
-#       - ./tls/certs/ca/ca.crt:/usr/share/kibana/config/ca.crt:ro
-#       - ./tls/certs/kibana/kibana.crt:/usr/share/kibana/config/kibana.crt:ro
-#       - ./tls/certs/kibana/kibana.key:/usr/share/kibana/config/kibana.key:ro
+#       - ./certs/ca/ca.crt:/usr/share/kibana/config/ca.crt:ro
+#       - ./certs/kibana/kibana.crt:/usr/share/kibana/config/kibana.crt:ro
+#       - ./certs/kibana/kibana.key:/usr/share/kibana/config/kibana.key:ro
 #     ports:
 #       - 5601:5601
 #     environment:
@@ -262,15 +252,9 @@ services:
 #       context: filebeat/
 #       args:
 #         ELASTIC_VERSION: ${ELASTIC_VERSION}
-#     # Run as 'root' instead of 'filebeat' (uid 1000) to allow reading
-#     # 'docker.sock' and the host's filesystem.
 #     user: root
 #     command:
-#       # Log to stderr.
 #       - -e
-#       # Disable config file permissions checks. Allows mounting
-#       # 'config/filebeat.yml' even if it's not owned by root.
-#       # see: https://www.elastic.co/guide/en/beats/libbeat/current/config-file-permissions.html
 #       - --strict.perms=false
 #     volumes:
 #       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
@@ -284,8 +268,7 @@ services:
 #         source: /var/run/docker.sock
 #         target: /var/run/docker.sock
 #         read_only: true
-#       # (!) CA certificate. Generate using the 'tls' service.
-#       - ./tls/certs/ca/ca.crt:/usr/share/filebeat/ca.crt:ro
+#       - ./certs/ca/ca.crt:/usr/share/filebeat/ca.crt:ro
 #     environment:
 #       FILEBEAT_INTERNAL_PASSWORD: ${FILEBEAT_INTERNAL_PASSWORD:-}
 #       BEATS_SYSTEM_PASSWORD: ${BEATS_SYSTEM_PASSWORD:-}
@@ -326,8 +309,6 @@ volumes:
       device: $PWD/srcs/frontend/
   elasticsearch_data:
     name: elasticsearch_data
-  grafana_data:
-    name: grafana_data
   prometheus_data:
     name: prometheus_data
 
