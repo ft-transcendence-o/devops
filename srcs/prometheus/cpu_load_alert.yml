@@ -6,7 +6,7 @@ groups:
           (
             scalar(node_load1{instance="node-exporter:9100",job="node-exporter"}) * 100 /
             count(count(node_cpu_seconds_total{instance="node-exporter:9100",job="node-exporter"}) by (cpu))
-          ) > 15
+          ) > 75
         for: 5m
         labels:
           severity: warning
