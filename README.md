@@ -1,10 +1,10 @@
 # PACPONG
 42cursus's final assignment, ft_transcendence
 
-<img width="1470" alt="PACPONG" src="https://github.com/ft-transcendence-o/devops/blob/main/srcs/PACPONG.png?raw=true">
+<img width="1470" alt="PACPONG" src="srcs/PACPONG.png">
 
 
-<video autoplay="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/102403228/359763698-a801b9e1-74d6-4d58-a5b0-13cdceb798e4.mov?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240821%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240821T055203Z&X-Amz-Expires=300&X-Amz-Signature=927370ea79011ad4e50c520ff94ccccaf4651a2faeb3625aa82cabd07818bcde&X-Amz-SignedHeaders=host&actor_id=102403228&key_id=0&repo_id=822500859"></video>
+<video autoplay="" src="srcs/pacpong_game.mov"></video>
 
 ## "Internal System URL List"
 
@@ -66,7 +66,7 @@ make
 
 ## Contributors
 
-<img width="1080" alt="contributors" src="https://github.com/ft-transcendence-o/devops/blob/main/srcs/contributors.png?raw=true">
+<img width="1080" alt="contributors" src="srcs/contributors.png">
 
 ---
 
