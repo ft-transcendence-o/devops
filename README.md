@@ -2,11 +2,9 @@
 42cursus's final assignment, ft_transcendence
 
 <img width="1470" alt="PACPONG" src="srcs/PACPONG.png">
-
-
 <video autoplay="" src="srcs/pacpong_game.mov"></video>
 
-## "Internal System URL List"
+## Internal System URL List
 
 * PACPONG: https://127.0.0.1/
 * ELK stack: https://127.0.0.1:5601/
