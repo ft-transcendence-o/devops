@@ -2,7 +2,7 @@
 42cursus's final assignment, ft_transcendence
 
 <img width="1470" alt="PACPONG" src="srcs/PACPONG.png">
-<video autoplay="" src="srcs/pacpong_game.mov"></video>
+<video autoplay="" src="https://github.com/user-attachments/assets/e19d35c4-4af1-498b-93b3-ae3b4f7b8236"></video>
 
 ## Internal System URL List
 
@@ -11,6 +11,11 @@
 * Grafana: https://127.0.0.1:3000/
 
 ## RUN
+
+### git submodule
+
+* <a href="https://github.com/ft-transcendence-o/backend">backend</a>
+* <a href="https://github.com/ft-transcendence-o/frontend">frontend</a>
 
 ```
 git submodule --init srcs/backend
